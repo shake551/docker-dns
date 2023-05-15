@@ -1,8 +1,29 @@
 version: '3'
+
+networks:
+  dns:
+    driver: bridge
+    driver_opts:
+      com.docker.networks.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.0.0/16
+          gateway: 10.10.0.1
+
 services:
   authoritative_dns:
     container_name: authoritative_dns
-    build: .
+    build: ./dns/authoritative/
+    networks:
+      dns:
+        ipv4_address: 10.10.10.11
+  cache_dns:
+    container_name: cache_dns
+    build: ./dns/cache/
     ports:
       - 53:53/tcp
       - 53:53/udp
+    networks:
+      dns:
+        ipv4_address: 10.10.10.10
