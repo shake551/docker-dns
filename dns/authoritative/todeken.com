@@ -7,6 +7,9 @@ $TTL 900
         900             ; minimum
         )
 ;
-      IN    NS  todeken.com.
-      IN    A   192.168.0.60
-www   IN    A   192.168.0.60
+                    IN NS todeken.com.
+                    IN A  192.168.0.60
+www                 IN A  192.168.0.60
+@                   IN MX 0 mailsv.todeken.com.
+;
+mailsv.todeken.com. IN A  192.168.0.60
